@@ -1,3 +1,6 @@
+:tests:
+  - echo hello
+
 :deploy:
     :sds:
         :app_spec_generator: sds/app_spec_generator
