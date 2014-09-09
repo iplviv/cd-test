@@ -1,10 +1,10 @@
-:tests:
+tests:
   - echo hello
 
-:deploy:
+deploy:
     sds:
-        :app_spec_generator: sds/app_spec_generator
-        :sds_application_name: SimpleApp
-        :sds_application_generator: sds/sds_application_generator
-        :sds_deployment_group: SimpleDG
-        :s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
+        app_spec_generator: sds/app_spec_generator
+        sds_application_name: SimpleApp
+        sds_application_generator: sds/sds_application_generator
+        sds_deployment_group: SimpleDG
+        s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
