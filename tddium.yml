@@ -2,7 +2,7 @@
   - echo hello
 
 :deploy:
-    :sds:
+    sds:
         :app_spec_generator: sds/app_spec_generator
         :sds_application_name: SimpleApp
         :sds_application_generator: sds/sds_application_generator
