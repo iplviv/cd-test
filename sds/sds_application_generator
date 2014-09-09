@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+APP_SPECS_FOLDER=$1
+DEST_APP_FOLDER=$2
+
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=`dirname $SCRIPT`
+
+TEMPLATE_DIR=${SCRIPTPATH}/Template
+
+cp -r ${TEMPLATE_DIR}/* $DEST_APP_FOLDER
+
+mkdir -p ${DEST_APP_FOLDER}/SimpleDeployService/AppSpecs
+cp -r ${APP_SPECS_FOLDER}/* ${DEST_APP_FOLDER}/SimpleDeployService/AppSpecs

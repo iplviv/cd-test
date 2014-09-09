@@ -1,0 +1,10 @@
+#!/bin/bash
+isExistApp=`pgrep webshell.py`
+if [[ -n  $isExistApp ]]; then
+    kill $isExistApp
+    sleep 1
+    isExistApp=`pgrep webshell.py`
+    if [[ -n  $isExistApp ]]; then
+        kill -9 $isExistApp
+    fi
+fi
