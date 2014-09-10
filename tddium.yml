@@ -6,8 +6,6 @@ user_environment:
     AWS_DEFAULT_REGION: us-east-1
 tests:
   - echo hello
-  - env
-  - aws sds help
   - ls aws/sds
 
 deploy:
