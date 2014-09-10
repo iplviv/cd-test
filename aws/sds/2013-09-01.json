@@ -1,0 +1,2902 @@
+{
+  "api_version": "2013-09-01",
+  "type": "json",
+  "json_version": 1.1,
+  "target_prefix": "RazorbillFrontEndService_20130901",
+  "signature_version": "v4",
+  "timestamp_format": "unixTimestamp",
+  "service_full_name": "Amazon Simple Deploy Service",
+  "service_abbreviation": "SDS",
+  "endpoint_prefix": "simpledeploy",
+  "xmlnamespace": "http://sds.amazonaws.com/doc/2013-09-01/",
+  "documentation": "Amazon Simple Deployment Service (Amazon SDS) is a flexible, reliable configuration management and deployment system that enables developers to automate the deployment of applications to Amazon Elastic Compute Cloud (Amazon EC2) instances, and to update the applications as required. Amazon SDS is programming language agnostic and works with existing applications without the need for code or configuration changes.",
+  "operations": {
+    "AbortDeployment": {
+      "name": "AbortDeployment",
+      "input": {
+        "shape_name": "AbortDeploymentInput",
+        "type": "structure",
+        "members": {
+          "deploymentId": {
+            "shape_name": "DeploymentId",
+            "type": "string",
+            "documentation": "The deployment ID of the deployment to abort.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of an abort deployment operation."
+      },
+      "output": {
+        "shape_name": "AbortDeploymentOutput",
+        "type": "structure",
+        "members": {
+          "status": {
+            "shape_name": "AbortStatus",
+            "type": "string",
+            "enum": [
+              "Pending",
+              "Succeeded"
+            ],
+            "documentation": "The status of the abort deployment operation."
+          },
+          "statusMessage": {
+            "shape_name": "Message",
+            "type": "string",
+            "documentation": "An accompanying status message."
+          }
+        },
+        "documentation": "Represents the output of an abort deployment operation."
+      },
+      "errors": [
+        {
+          "shape_name": "DeploymentIdRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment ID was not specified."
+        },
+        {
+          "shape_name": "DeploymentDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment does not exist under the user's Amazon Web Services (AWS) account."
+        },
+        {
+          "shape_name": "DeploymentAlreadyCompletedException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment is already completed."
+        },
+        {
+          "shape_name": "InvalidDeploymentIdException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid deployment ID was specified."
+        }
+      ],
+      "documentation": "Aborts an ongoing deployment in Amazon Simple Deployment Service (Amazon SDS)."
+    },
+    "BatchGetApplications": {
+      "name": "BatchGetApplications",
+      "input": {
+        "shape_name": "BatchGetApplicationsInput",
+        "type": "structure",
+        "members": {
+          "applicationNames": {
+            "shape_name": "ApplicationsList",
+            "type": "list",
+            "members": {
+              "shape_name": "ApplicationName",
+              "min_length": 1,
+              "max_length": 100,
+              "type": "string",
+              "documentation": "An existing application name."
+            },
+            "documentation": "One or more existing application names, with multiple application names separated by a space."
+          }
+        },
+        "documentation": "Represents the input of a batch get applications operation."
+      },
+      "output": {
+        "shape_name": "BatchGetApplicationsOutput",
+        "type": "structure",
+        "members": {
+          "applicationsInfo": {
+            "shape_name": "ApplicationsInfoList",
+            "type": "list",
+            "members": {
+              "shape_name": "ApplicationInfo",
+              "type": "structure",
+              "members": {
+                "applicationId": {
+                  "shape_name": "ApplicationId",
+                  "type": "string",
+                  "documentation": "The application ID."
+                },
+                "applicationName": {
+                  "shape_name": "ApplicationName",
+                  "min_length": 1,
+                  "max_length": 100,
+                  "type": "string",
+                  "documentation": "The name of the application."
+                },
+                "createTime": {
+                  "shape_name": "Timestamp",
+                  "type": "timestamp",
+                  "documentation": "A timestamp indicating when the application was created."
+                }
+              },
+              "documentation": "Information about the application."
+            },
+            "documentation": "A list of applications."
+          }
+        },
+        "documentation": "Represents the output of a batch get applications operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "You must specify at least one application name."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "At least one application name was specified in an invalid format."
+        }
+      ],
+      "documentation": "Gets information about a list of applications."
+    },
+    "BatchGetDeployments": {
+      "name": "BatchGetDeployments",
+      "input": {
+        "shape_name": "BatchGetDeploymentsInput",
+        "type": "structure",
+        "members": {
+          "deploymentIds": {
+            "shape_name": "DeploymentsList",
+            "type": "list",
+            "members": {
+              "shape_name": "DeploymentId",
+              "type": "string",
+              "documentation": "A deployment ID to get information about."
+            },
+            "documentation": "The deployment IDs to get information about."
+          }
+        },
+        "documentation": "Represents the input of a batch get deployments operation."
+      },
+      "output": {
+        "shape_name": "BatchGetDeploymentsOutput",
+        "type": "structure",
+        "members": {
+          "deploymentsInfo": {
+            "shape_name": "DeploymentsInfoList",
+            "type": "list",
+            "members": {
+              "shape_name": "DeploymentInfo",
+              "type": "structure",
+              "members": {
+                "applicationName": {
+                  "shape_name": "ApplicationName",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 100,
+                  "documentation": "The name of the application."
+                },
+                "deploymentGroupName": {
+                  "shape_name": "DeploymentGroupName",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 100,
+                  "documentation": "The name of the deployment group that the deployment is in."
+                },
+                "deploymentConfigName": {
+                  "shape_name": "DeploymentConfigName",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 100,
+                  "documentation": "The name of the deployment configuration used in this deployment."
+                },
+                "deploymentId": {
+                  "shape_name": "DeploymentId",
+                  "type": "string",
+                  "documentation": "The deployment ID."
+                },
+                "s3Location": {
+                  "shape_name": "S3Location",
+                  "type": "structure",
+                  "members": {
+                    "bucket": {
+                      "shape_name": "S3Bucket",
+                      "type": "string",
+                      "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+                    },
+                    "key": {
+                      "shape_name": "S3Key",
+                      "type": "string",
+                      "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+                    },
+                    "bundleType": {
+                      "shape_name": "BundleType",
+                      "type": "string",
+                      "enum": [
+                        "tar",
+                        "tgz",
+                        "zip"
+                      ],
+                      "documentation": "The file type of the application's bundled artifacts."
+                    },
+                    "version": {
+                      "shape_name": "VersionId",
+                      "type": "string",
+                      "documentation": "A specific version, if any, of the Amazon S3 object that represents the application's bundled artifacts. The version will be returned only for Amazon S3 buckets that have versioning enabled."
+                    },
+                    "eTag": {
+                      "shape_name": "ETag",
+                      "type": "string",
+                      "documentation": "The ETag, if any, of the Amazon S3 object that represents the application's bundled artifacts."
+                    }
+                  },
+                  "documentation": "Information about the location of an application's artifacts that are stored in Amazon Simple Storage Service (Amazon S3)."
+                },
+                "status": {
+                  "shape_name": "DeploymentStatus",
+                  "type": "string",
+                  "enum": [
+                    "Created",
+                    "Queued",
+                    "InProgress",
+                    "Succeeded",
+                    "Failed",
+                    "Aborted"
+                  ],
+                  "documentation": "The current status of the deployment."
+                },
+                "errorInformation": {
+                  "shape_name": "ErrorInformation",
+                  "type": "structure",
+                  "members": {
+                    "code": {
+                      "shape_name": "ErrorCode",
+                      "type": "string",
+                      "enum": [
+                        "DEPLOYMENT_GROUP_MISSING",
+                        "INSTANCE_GROUP_MISSING",
+                        "APPLICATION_MISSING",
+                        "REVISION_MISSING",
+                        "IAM_ROLE_MISSING",
+                        "IAM_ROLE_PERMISSIONS",
+                        "OVER_MAX_INSTANCES",
+                        "NO_INSTANCES",
+                        "TIMEOUT",
+                        "HEALTH_CONSTRAINTS_INVALID",
+                        "HEALTH_CONSTRAINTS",
+                        "INTERNAL_ERROR"
+                      ],
+                      "documentation": "The error code."
+                    },
+                    "message": {
+                      "shape_name": "ErrorMessage",
+                      "type": "string",
+                      "documentation": "An accompanying error message."
+                    }
+                  },
+                  "documentation": "Information about a deployment error."
+                },
+                "createTime": {
+                  "shape_name": "Timestamp",
+                  "type": "timestamp",
+                  "documentation": "A timestamp indicating when the deployment was created."
+                },
+                "startTime": {
+                  "shape_name": "Timestamp",
+                  "type": "timestamp",
+                  "documentation": "A timestamp indicating when the deployment began deploying to the deployment group."
+                },
+                "completeTime": {
+                  "shape_name": "Timestamp",
+                  "type": "timestamp",
+                  "documentation": "A timestamp indicating when the deployment finished deploying to the deployment group."
+                },
+                "deploymentOverview": {
+                  "shape_name": "DeploymentOverview",
+                  "type": "structure",
+                  "members": {
+                    "Pending": {
+                      "shape_name": "InstanceCount",
+                      "type": "long",
+                      "documentation": "The number of instances for which the deployment is still pending." 
+                    },
+                    "InProgress": {
+                      "shape_name": "InstanceCount",
+                      "type": "long",
+                      "documentation": "The number of instances for which the deployment is still in progress."
+                    },
+                    "Succeeded": {
+                      "shape_name": "InstanceCount",
+                      "type": "long",
+                      "documentation": "The number of instances for which the deployment has succeeded."
+                    },
+                    "Failed": {
+                      "shape_name": "InstanceCount",
+                      "type": "long",
+                      "documentation": "The number of instances for which the deployment has failed."
+                    },
+                    "Skipped": {
+                      "shape_name": "InstanceCount",
+                      "type": "long",
+                      "documentation": "The number of instances for which the deployment has been skipped."
+                    }
+                  },
+                  "documentation": "Provides an overview of the status of all instances in the deployment group."
+                },
+                "reason": {
+                  "shape_name": "Description",
+                  "type": "string",
+                  "documentation": "A comment about the deployment."
+                },
+                "creator": {
+                  "shape_name": "DeploymentCreator",
+                  "type": "string",
+                  "enum": [
+                    "user",
+                    "autoscaling"
+                  ],
+                  "documentation": "How the deployment was created."
+                }
+              },
+              "documentation": "Represents information about a deployment."
+            },
+            "documentation": "Represents information about a list of deployments."
+          }
+        },
+        "documentation": "Represents the output of a batch get deployments operation."
+      },
+      "errors": [
+        {
+          "shape_name": "DeploymentIdRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "You must specify at least one deployment ID."
+        },
+        {
+          "shape_name": "InvalidDeploymentIdException",
+          "type": "structure",
+          "members": {},
+          "documentation": "At least one of the deployment IDs that was specified was invalid."
+        }
+      ],
+      "documentation": "Gets information about a list of deployments."
+    },
+    "CreateApplication": {
+      "name": "CreateApplication",
+      "input": {
+        "shape_name": "CreateApplicationInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a create application operation."
+      },
+      "output": {
+        "shape_name": "CreateApplicationOutput",
+        "type": "structure",
+        "members": {
+          "applicationId": {
+            "shape_name": "ApplicationId",
+            "type": "string",
+            "documentation": "The application ID."
+          }
+        },
+        "documentation": "Represents the output of a create application operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationAlreadyExistsException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An application with the specified name already exists for the Amazon Web Services (AWS) account."
+        },
+        {
+          "shape_name": "ApplicationLimitExceededException",
+          "type": "structure",
+          "members": {},
+          "documentation": "More applications were attempted to be created than are allowed."
+        }
+      ],
+      "documentation": "Registers a new application with Amazon Simple Deployment Service (Amazon SDS)."
+    },
+    "CreateDeployment": {
+      "name": "CreateDeployment",
+      "input": {
+        "shape_name": "CreateDeploymentInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the application to deploy.",
+            "required": true
+          },
+          "deploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the deployment group to deploy to."
+          },
+          "s3Location": {
+            "shape_name": "S3Location",
+            "type": "structure",
+            "members": {
+              "bucket": {
+                "shape_name": "S3Bucket",
+                "type": "string",
+                "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+              },
+              "key": {
+                "shape_name": "S3Key",
+                "type": "string",
+                "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+              },
+              "bundleType": {
+                "shape_name": "BundleType",
+                "type": "string",
+                "enum": [
+                  "tar",
+                  "tgz",
+                  "zip"
+                ],
+                "documentation": "The file type of the application's bundled artifacts."
+              },
+              "version": {
+                "shape_name": "VersionId",
+                "type": "string",
+                "documentation": "A specific version of the Amazon S3 object that represents the application's bundled artifacts. Specify the version identifier as an input parameter only if you have Amazon S3 versioning enabled. If the version is not specified, the system will use the most recent version by default."
+              },
+              "eTag": {
+                "shape_name": "ETag",
+                "type": "string",
+                "documentation": "The ETag of the Amazon S3 object that represents the application's bundled artifacts. Specify the ETag only if you do not have versioning enabled, and you want to ensure that the system will deploy only the Amazon S3 object that matches the ETag. If the ETag is not specified as an input parameter, ETag validation of the object will be skipped."
+              }
+            },
+            "documentation": "Information about the location of an application's artifacts that are stored in Amazon Simple Storage Service (Amazon S3)."
+          },
+          "deploymentConfigName": {
+            "shape_name": "DeploymentConfigName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the deployment configuration to use. If not given, the value configured in the instance group will be used as default. If the instance group does not have a deployment configuration associated with it, a global default will be used. The deployment configuration name must identify an existing deployment configuration in the user's AWS account."
+          },
+          "reason": {
+            "shape_name": "Description",
+            "type": "string",
+            "documentation": "A comment about the deployment."
+          }
+        },
+        "documentation": "Represents the input of a create deployment operation."
+      },
+      "output": {
+        "shape_name": "CreateDeploymentOutput",
+        "type": "structure",
+        "members": {
+          "deploymentId": {
+            "shape_name": "DeploymentId",
+            "type": "string",
+            "documentation": "A unique deployment ID."
+          }
+        },
+        "documentation": "Represents the output of a create deployment operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "DeploymentGroupNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was not specified."
+        },
+        {
+          "shape_name": "InvalidDeploymentGroupNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentGroupDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named deployment group doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "RevisionRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application revision was not specified."
+        },
+        {
+          "shape_name": "InvalidRevisionException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The revision was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidDeploymentConfigNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentConfigDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration does not exist in the user's AWS account."
+        },
+        {
+          "shape_name": "DescriptionTooLongException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The provided description is too long."
+        },
+        {
+          "shape_name": "DeploymentLimitExceededException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The number of allowed deployments was exceeded."
+        }
+      ],
+      "documentation": "Deploys an application from the specified location to the specified instance group."
+    },
+    "CreateDeploymentConfig": {
+      "name": "CreateDeploymentConfig",
+      "input": {
+        "shape_name": "CreateDeploymentConfigInput",
+        "type": "structure",
+        "members": {
+          "deploymentConfigName": {
+            "shape_name": "DeploymentConfigName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the deployment configuration to create.",
+            "required": true
+          },
+          "minimumHealthyHosts": {
+            "shape_name": "MinimumHealthyHosts",
+            "type": "structure",
+            "members": {
+              "value": {
+                "shape_name": "MinimumHealthyHostsValue",
+                "type": "integer",
+                "documentation": "The value of the count or percentage, expressed as an integer."
+              },
+              "type": {
+                "shape_name": "MinimumHealthyHostsType",
+                "type": "string",
+                "enum": [
+                  "HOST_COUNT",
+                  "FLEET_PERCENT"
+                ],
+                "documentation": "Whether to specify the healthy hosts value as a number or a percentage of the fleet."
+              }
+            },
+            "documentation": "The minimum number or fleet percentage of healthy hosts that should be available at any time during the deployment."
+          }
+        },
+        "documentation": "Represents the input of a create deployment configuration operation."
+      },
+      "output": {
+        "shape_name": "CreateDeploymentConfigOutput",
+        "type": "structure",
+        "members": {
+          "deploymentConfigId": {
+            "shape_name": "DeploymentConfigId",
+            "type": "string",
+            "documentation": "A unique deployment configuration ID."
+          }
+        },
+        "documentation": "Represents the ouptut of a create deployment configuration operation."
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidDeploymentConfigNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentConfigNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was not specified."
+        },
+        {
+          "shape_name": "DeploymentConfigAlreadyExistsException",
+          "type": "structure",
+          "members": {},
+          "documentation": "A deployment configuration with the specified name already exists for the AWS account."
+        },
+        {
+          "shape_name": "InvalidMinimumHealthyHostValueException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The minimum healthy hosts value was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentConfigLimitExceededException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The limit on deployment configurations was exceeded."
+        }
+      ],
+      "documentation": "Creates a new deployment configuration and returns a unique ID."
+    },
+    "CreateDeploymentGroup": {
+      "name": "CreateDeploymentGroup",
+      "input": {
+        "shape_name": "CreateDeploymentGroupInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the application to associate the deployment group with. The specified application must exist in the user's AWS account.",
+            "required": true
+          },
+          "deploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the deployment group to create.",
+            "required": true
+          },
+          "deploymentConfigName": {
+            "shape_name": "DeploymentConfigName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the deployment configuration to use. If not specified, a global default will be used."
+          },
+          "ec2TagFilters": {
+            "shape_name": "EC2TagFilterList",
+            "type": "list",
+            "members": {
+              "shape_name": "EC2TagFilter",
+              "type": "structure",
+              "members": {
+                "Key": {
+                  "shape_name": "Key",
+                  "type": "string",
+                  "documentation": "The Amazon EC2 tag filter key. Required if Type is set to KEY_ONLY or KEY_AND_VALUE."
+                },
+                "Value": {
+                  "shape_name": "Value",
+                  "type": "string",
+                  "documentation": "The Amazon EC2 tag filter value. Required if Type is set to VALUE_ONLY or KEY_AND_VALUE."
+                },
+                "Type": {
+                  "shape_name": "EC2TagFilterType",
+                  "type": "string",
+                  "enum": [
+                    "KEY_ONLY",
+                    "VALUE_ONLY",
+                    "KEY_AND_VALUE"
+                  ],
+                  "documentation": "Whether to specify a key only, a value only, or both a key and value."
+                }
+              },
+              "documentation": "An Amazon EC2 tag to filter on."
+            },
+            "documentation": "The Amazon EC2 tags to filter on."
+          },
+          "autoScalingGroups": {
+            "shape_name": "AutoScalingGroupNameList",
+            "type": "list",
+            "members": {
+              "shape_name": "AutoScalingGroupName",
+              "type": "string",
+              "documentation": "An Auto Scaling group name."
+            },
+            "documentation": "A list of Auto Scaling groups to be included in the deployment group. Separate each Auto Scaling group name with a space."
+          },
+          "serviceRoleArn": {
+            "shape_name": "Role",
+            "type": "string",
+            "documentation": "The user-supplied AWS Identity & Access Management (IAM) role Amazon Resource Name (ARN) that allows Amazon SDS to act on their behalf when interacting with AWS services."
+          }
+        },
+        "documentation": "Represents the input of a create deployment group operation."
+      },
+      "output": {
+        "shape_name": "CreateDeploymentGroupOutput",
+        "type": "structure",
+        "members": {
+          "deploymentGroupId": {
+            "shape_name": "DeploymentGroupId",
+            "type": "string",
+            "documentation": "A unique deployment group ID."
+          }
+        },
+        "documentation": "Represents the output of a create deployment group operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified application name does not exist."
+        },
+        {
+          "shape_name": "DeploymentGroupNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was not specified."
+        },
+        {
+          "shape_name": "InvalidDeploymentGroupNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentGroupAlreadyExistsException",
+          "type": "structure",
+          "members": {},
+          "documentation": "A deployment group with the specified name already exists for the AWS account."
+        },
+        {
+          "shape_name": "InvalidEC2TagException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid Amazon EC2 tag was specified."
+        },
+        {
+          "shape_name": "InvalidAutoScalingGroupException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid Auto Scaling group name was specified."
+        },
+        {
+          "shape_name": "InvalidDeploymentConfigNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentConfigDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named deployment configuration does not exist in the user's AWS account."
+        },
+        {
+          "shape_name": "RoleRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "You must specify an IAM role."
+        },
+        {
+          "shape_name": "InvalidRoleException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An IAM role was specified, but is invalid."
+        },
+        {
+          "shape_name": "DeploymentGroupLimitExceededException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The limit on deployment groups was exceeded."
+        }
+      ],
+      "documentation": "Creates a new deployment group for an application to deploy to."
+    },
+    "DeleteApplication": {
+      "name": "DeleteApplication",
+      "input": {
+        "shape_name": "DeleteApplicationInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application to delete.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a delete application operation."
+      },
+      "output": "Represents the output of a delete application operation.",
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        }
+      ],
+      "documentation": "Deletes the specified application from the user's Amazon Web Services (AWS) account."
+    },
+    "DeleteDeploymentConfig": {
+      "name": "DeleteDeploymentConfig",
+      "input": {
+        "shape_name": "DeleteDeploymentConfigInput",
+        "type": "structure",
+        "members": {
+          "deploymentConfigName": {
+            "shape_name": "DeploymentConfigName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the deployment configuration to delete.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a delete deployment configuration operation."
+      },
+      "output": "Represents the input of a delete deployment configuration operation.",
+      "errors": [
+        {
+          "shape_name": "InvalidDeploymentConfigNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was not specified."
+        },
+        {
+          "shape_name": "DeploymentConfigNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentConfigInUseException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration is still in use."
+        },
+        {
+          "shape_name": "InvalidOperationException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid operation was detected."
+        }
+      ],
+      "documentation": "Deletes a deployment configuration from the user's Amazon Web Services (AWS) account."
+    },
+    "DeleteDeploymentGroup": {
+      "name": "DeleteDeploymentGroup",
+      "input": {
+        "shape_name": "DeleteDeploymentGroupInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application that is associated with the deployment group.",
+            "required": true
+          },
+          "deploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the deployment group to delete.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a delete deployment group operation."
+      },
+      "output": {
+        "shape_name": "DeleteDeploymentGroupOutput",
+        "type": "structure",
+        "members": {
+          "hooksNotCleanedUp": {
+            "shape_name": "AutoScalingGroupList",
+            "type": "list",
+            "members": {
+              "shape_name": "AutoScalingGroup",
+              "type": "structure",
+              "members": {
+                "name": {
+                  "shape_name": "AutoScalingGroupName",
+                  "type": "string",
+                  "documentation": "The name of the Auto Scaling group for which the lifecycle event hook could not be removed."
+                },
+                "hook": {
+                  "shape_name": "AutoScalingGroupHook",
+                  "type": "string",
+                  "documentation": "The name of the Auto Scaling lifecycle event hook that could not be removed."
+                }
+              },
+              "documentation": "An Auto Scaling group for which some Auto Scaling lifecycle event hooks could not be removed."
+            },
+            "documentation": "A list of Auto Scaling groups for which some Auto Scaling lifecycle event hooks could not be removed."
+          }
+        },
+        "documentation": "Represents the output of a delete deployment group operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentGroupNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was not specified."
+        },
+        {
+          "shape_name": "InvalidDeploymentGroupNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidRoleException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified service role ARN is invalid."
+        }
+      ],
+      "documentation": "Deletes an existing deployment group from the user's Amazon Web Services (AWS) account."
+    },
+    "GetApplication": {
+      "name": "GetApplication",
+      "input": {
+        "shape_name": "GetApplicationInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application to get information about.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a get application operation."
+      },
+      "output": {
+        "shape_name": "GetApplicationOutput",
+        "type": "structure",
+        "members": {
+          "application": {
+            "shape_name": "ApplicationInfo",
+            "type": "structure",
+            "members": {
+              "applicationId": {
+                "shape_name": "ApplicationId",
+                "type": "string",
+                "documentation": "The application ID."
+              },
+              "applicationName": {
+                "shape_name": "ApplicationName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The application name."
+              },
+              "createTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "A timestamp indicating when the application was first registered."
+              }
+            },
+            "documentation": "Information about an application that is registered with Amazon Simple Deployment Service (Amazon SDS)."
+          }
+        },
+        "documentation": "Represents the output of a get application operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        }
+      ],
+      "documentation": "Returns information about an application that is registered with Amazon Simple Deployment Service (Amazon SDS)."
+    },
+    "GetApplicationRevision": {
+      "name": "GetApplicationRevision",
+      "input": {
+        "shape_name": "GetApplicationRevisionInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application that is associated with the revision.",
+            "required": true
+          },
+          "revision": {
+            "shape_name": "S3Location",
+            "type": "structure",
+            "members": {
+              "bucket": {
+                "shape_name": "S3Bucket",
+                "type": "string",
+                "documentation": "The Amazon S3 bucket name where the revision is stored."
+              },
+              "key": {
+                "shape_name": "S3Key",
+                "type": "string",
+                "documentation": "The name of the object in Amazon S3 that represents the application's bundled artifacts."
+              },
+              "bundleType": {
+                "shape_name": "BundleType",
+                "type": "string",
+                "enum": [
+                  "tar",
+                  "tgz",
+                  "zip"
+                ],
+                "documentation": "The file type of the revision's bundles artifacts."
+              },
+              "version": {
+                "shape_name": "VersionId",
+                "type": "string",
+                "documentation": "A specific version of the Amazon S3 object that represents the application's bundled artifacts. Specify the version identifier as an input parameter only if you have Amazon S3 versioning enabled. If the version is not specified, the system will use the most recent version by default."
+              },
+              "eTag": {
+                "shape_name": "ETag",
+                "type": "string",
+                "documentation": "The ETag of the Amazon S3 object that represents the application's bundled artifacts. Specify the ETag only if you do not have versioning enabled, and you want to ensure that the system will deploy only the Amazon S3 object that matches the ETag. If the ETag is not specified as an input parameter, ETag validation of the object will be skipped."
+              }
+            },
+            "documentation": "Represents information about an application revision that is stored in Amazon Simple Storage Service (Amazon S3).",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a get application revision operation."
+      },
+      "output": {
+        "shape_name": "GetApplicationRevisionOutput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The application name."
+          },
+          "revision": {
+            "shape_name": "S3Location",
+            "type": "structure",
+            "members": {
+              "bucket": {
+                "shape_name": "S3Bucket",
+                "type": "string",
+                "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+              },
+              "key": {
+                "shape_name": "S3Key",
+                "type": "string",
+                "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+              },
+              "bundleType": {
+                "shape_name": "BundleType",
+                "type": "string",
+                "enum": [
+                  "tar",
+                  "tgz",
+                  "zip"
+                ],
+                "documentation": "The file type of the application's bundled artifacts."
+              },
+              "version": {
+                "shape_name": "VersionId",
+                "type": "string",
+                "documentation": "A specific version of the Amazon S3 object that represents the application's bundled artifacts."
+              },
+              "eTag": {
+                "shape_name": "ETag",
+                "type": "string",
+                "documentation": "The ETag of the Amazon S3 object that represents the application's bundled artifacts."
+              }
+            },
+            "documentation": "Information about the revision in Amazon S3."
+          },
+          "revisionInfo": {
+            "shape_name": "S3RevisionInfo",
+            "type": "structure",
+            "members": {
+              "description": {
+                "shape_name": "Description",
+                "type": "string",
+                "documentation": "Additional information about the revision in Amazon S3."
+              },
+              "deploymentGroups": {
+                "shape_name": "DeploymentGroupsList",
+                "type": "list",
+                "members": {
+                  "shape_name": "DeploymentGroupName",
+                  "type": "string",
+                  "min_length": 1,
+                  "max_length": 100,
+                  "documentation": "A deployment group that uses this revision."
+                },
+                "documentation": "A list of deployment groups that use this revision."
+              },
+              "firstUsedTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the revision was first used by Amazon Simple Deployment Service (Amazon SDS)."
+              },
+              "lastUsedTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the revision was last used by Amazon SDS."
+              },
+              "registerTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the revision was registered with Amazon SDS."
+              }
+            },
+            "documentation": "Information about a specific Amazon SDS application revision."
+          }
+        },
+        "documentation": "Represents the output of a get application revision operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "RevisionDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified revision does not exist."
+        },
+        {
+          "shape_name": "RevisionRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "Revision information is required but was not provided."
+        },
+        {
+          "shape_name": "InvalidRevisionException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The revision was specified in an invalid format."
+        }
+      ],
+      "documentation": "Returns information about a revision that is associated with an application registered with Amazon Simple Deployment Service (Amazon SDS)."
+    },
+    "GetDeployment": {
+      "name": "GetDeployment",
+      "input": {
+        "shape_name": "GetDeploymentInput",
+        "type": "structure",
+        "members": {
+          "deploymentId": {
+            "shape_name": "DeploymentId",
+            "type": "string",
+            "documentation": "The ID of the deployment to get information about.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a get deployment operation."
+      },
+      "output": {
+        "shape_name": "GetDeploymentOutput",
+        "type": "structure",
+        "members": {
+          "deploymentInfo": {
+            "shape_name": "DeploymentInfo",
+            "type": "structure",
+            "members": {
+              "applicationName": {
+                "shape_name": "ApplicationName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The application name."
+              },
+              "deploymentGroupName": {
+                "shape_name": "DeploymentGroupName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The deployment group name."
+              },
+              "deploymentConfigName": {
+                "shape_name": "DeploymentConfigName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The deployment configuration name."
+              },
+              "deploymentId": {
+                "shape_name": "DeploymentId",
+                "type": "string",
+                "documentation": "The deployment ID."
+              },
+              "s3Location": {
+                "shape_name": "S3Location",
+                "type": "structure",
+                "members": {
+                  "bucket": {
+                    "shape_name": "S3Bucket",
+                    "type": "string",
+                    "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+                  },
+                  "key": {
+                    "shape_name": "S3Key",
+                    "type": "string",
+                    "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+                  },
+                  "bundleType": {
+                    "shape_name": "BundleType",
+                    "type": "string",
+                    "enum": [
+                      "tar",
+                      "tgz",
+                      "zip"
+                    ],
+                    "documentation": "The file type of the application's bundled artifacts."
+                  },
+                  "version": {
+                    "shape_name": "VersionId",
+                    "type": "string",
+                    "documentation": "A specific version, if any, of the Amazon S3 object that represents the application's bundled artifacts. The version will be returned only for Amazon S3 buckets that have versioning enabled."
+                  },
+                  "eTag": {
+                    "shape_name": "ETag",
+                    "type": "string",
+                    "documentation": "The ETag, if any, of the Amazon S3 object that represents the application's bundled artifacts."
+                  }
+                },
+                "documentation": "Information about the location of an application's artifacts that are stored in Amazon Simple Storage Service (Amazon S3)."
+              },
+              "status": {
+                "shape_name": "DeploymentStatus",
+                "type": "string",
+                "enum": [
+                  "Created",
+                  "Queued",
+                  "InProgress",
+                  "Succeeded",
+                  "Failed",
+                  "Aborted"
+                ],
+                "documentation": "The current state of the deployment as a whole."
+              },
+              "errorInformation": {
+                "shape_name": "ErrorInformation",
+                "type": "structure",
+                "members": {
+                  "code": {
+                    "shape_name": "ErrorCode",
+                    "type": "string",
+                    "enum": [
+                      "DEPLOYMENT_GROUP_MISSING",
+                      "INSTANCE_GROUP_MISSING",
+                      "APPLICATION_MISSING",
+                      "REVISION_MISSING",
+                      "IAM_ROLE_MISSING",
+                      "IAM_ROLE_PERMISSIONS",
+                      "OVER_MAX_INSTANCES",
+                      "NO_INSTANCES",
+                      "TIMEOUT",
+                      "HEALTH_CONSTRAINTS_INVALID",
+                      "HEALTH_CONSTRAINTS",
+                      "INTERNAL_ERROR"
+                    ],
+                    "documentation": "The error code."
+                  },
+                  "message": {
+                    "shape_name": "ErrorMessage",
+                    "type": "string",
+                    "documentation": "An accompanying error message."
+                  }
+                },
+                "documentation": "Information about a deployment error." 
+              },
+              "createTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the deployment was created."
+              },
+              "startTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the deployment was started."
+              },
+              "completeTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the deployment was completed."
+              },
+              "deploymentOverview": {
+                "shape_name": "DeploymentOverview",
+                "type": "structure",
+                "members": {
+                  "Pending": {
+                    "shape_name": "InstanceCount",
+                    "type": "long",
+                    "documentation": "The number of instances that are pending in the deployment."
+                  },
+                  "InProgress": {
+                    "shape_name": "InstanceCount",
+                    "type": "long",
+                    "documentation": "The number of instances that are in progress in the deployment."
+                  },
+                  "Succeeded": {
+                    "shape_name": "InstanceCount",
+                    "type": "long",
+                    "documentation": "The number of instances that have succeeded in the deployment."
+                  },
+                  "Failed": {
+                    "shape_name": "InstanceCount",
+                    "type": "long",
+                    "documentation": "The number of instances that have failed in the deployment."
+                  },
+                  "Skipped": {
+                    "shape_name": "InstanceCount",
+                    "type": "long",
+                    "documentation": "The number of instances that have been skipped in the deployment."
+                  }
+                },
+                "documentation": "A sumary of the deployment statuses of the instances in the deployment."
+              },
+              "reason": {
+                "shape_name": "Description",
+                "type": "string",
+                "documentation": "A comment about the deployment."
+              },
+              "creator": {
+                "shape_name": "DeploymentCreator",
+                "type": "string",
+                "enum": [
+                  "user",
+                  "autoscaling"
+                ],
+                "documentation": "How the deployment was created."
+              }
+            },
+            "documentation": "Information about the deployment."
+          }
+        },
+        "documentation": "Represents the ouptut of a get deployment operation."
+      },
+      "errors": [
+        {
+          "shape_name": "DeploymentIdRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "You must specify a deployment ID."
+        },
+        {
+          "shape_name": "InvalidDeploymentIdException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid deployment ID was specified."
+        },
+        {
+          "shape_name": "DeploymentDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified deployment ID does not exist."
+        }
+      ],
+      "documentation": "Returns information about a deployment that is associated with a user's Amazon Web Services (AWS) account."
+    },
+    "GetDeploymentConfig": {
+      "name": "GetDeploymentConfig",
+      "input": {
+        "shape_name": "GetDeploymentConfigInput",
+        "type": "structure",
+        "members": {
+          "deploymentConfigName": {
+            "shape_name": "DeploymentConfigName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the deployment configuration to get information about.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a get deployment configuration operation."
+      },
+      "output": {
+        "shape_name": "GetDeploymentConfigOutput",
+        "type": "structure",
+        "members": {
+          "deploymentConfigInfo": {
+            "shape_name": "DeploymentConfigInfo",
+            "type": "structure",
+            "members": {
+              "deploymentConfigId": {
+                "shape_name": "DeploymentConfigId",
+                "type": "string",
+                "documentation": "The deployment configuration ID."
+              },
+              "deploymentConfigName": {
+                "shape_name": "DeploymentConfigName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The deployment configuration name."
+              },
+              "minimumHealthyHosts": {
+                "shape_name": "MinimumHealthyHosts",
+                "type": "structure",
+                "members": {
+                  "value": {
+                    "shape_name": "MinimumHealthyHostsValue",
+                    "type": "integer",
+                    "documentation": "The minimum healthy hosts value."
+                  },
+                  "type": {
+                    "shape_name": "MinimumHealthyHostsType",
+                    "type": "string",
+                    "enum": [
+                      "HOST_COUNT",
+                      "FLEET_PERCENT"
+                    ],
+                    "documentation": "The minimum number of healthy hosts or percentage of the total number of hosts in the deployment."
+                  }
+                },
+                "documentation": "Information about the minimum number of healthy hosts."
+              },
+              "createTime": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the deployment configuration was created."
+              }
+            },
+            "documentation": "Information about the deployment configuration."
+          }
+        },
+        "documentation": "Represents the output of a get deployment configuration operation."
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidDeploymentConfigNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment configuration name was not specified."
+        },
+        {
+          "shape_name": "DeploymentConfigNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment config name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentConfigDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named deployment config does not exist in the user's AWS account."
+        }
+      ],
+      "documentation": "Returns information about a deployment configuration that is associated with a user's Amazon Web Services (AWS) account."
+    },
+    "GetDeploymentGroup": {
+      "name": "GetDeploymentGroup",
+      "input": {
+        "shape_name": "GetDeploymentGroupInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application that is associated with the deployment group.",
+            "required": true
+          },
+          "deploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the deployment group to get information about.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a get deployment group operation."
+      },
+      "output": {
+        "shape_name": "GetDeploymentGroupOutput",
+        "type": "structure",
+        "members": {
+          "deploymentGroupInfo": {
+            "shape_name": "DeploymentGroupInfo",
+            "type": "structure",
+            "members": {
+              "applicationName": {
+                "shape_name": "ApplicationName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The application name."
+              },
+              "deploymentGroupId": {
+                "shape_name": "DeploymentGroupId",
+                "type": "string",
+                "documentation": "The deployment group ID."
+              },
+              "deploymentGroupName": {
+                "shape_name": "DeploymentGroupName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The deployment group name."
+              },
+              "deploymentConfigName": {
+                "shape_name": "DeploymentConfigName",
+                "type": "string",
+                "min_length": 1,
+                "max_length": 100,
+                "documentation": "The deployment configuration name."
+              },
+              "ec2TagFilters": {
+                "shape_name": "EC2TagFilterList",
+                "type": "list",
+                "members": {
+                  "shape_name": "EC2TagFilter",
+                  "type": "structure",
+                  "members": {
+                    "Key": {
+                      "shape_name": "Key",
+                      "type": "string",
+                      "documentation": "The Amazon EC2 tag filter key."
+                    },
+                    "Value": {
+                      "shape_name": "Value",
+                      "type": "string",
+                      "documentation": "The Amazon EC2 tag filter value."
+                    },
+                    "Type": {
+                      "shape_name": "EC2TagFilterType",
+                      "type": "string",
+                      "enum": [
+                        "KEY_ONLY",
+                        "VALUE_ONLY",
+                        "KEY_AND_VALUE"
+                      ],
+                      "documentation": "Specifies a key only, a value only, or both a key and value."
+                    }
+                  },
+                  "documentation": "An Amazon EC2 tag filter."
+                },
+                "documentation": "The Amazon EC2 tag filters."
+              },
+              "autoScalingGroups": {
+                "shape_name": "AutoScalingGroupList",
+                "type": "list",
+                "members": {
+                  "shape_name": "AutoScalingGroup",
+                  "type": "structure",
+                  "members": {
+                    "name": {
+                      "shape_name": "AutoScalingGroupName",
+                      "type": "string",
+                      "documentation": "The name of the Auto Scaling group for which the lifecycle event hook could not be removed."
+                    },
+                    "hook": {
+                      "shape_name": "AutoScalingGroupHook",
+                      "type": "string",
+                      "documentation": "The name of the Auto Scaling lifecycle event hook that could not be removed."
+                    }
+                  },
+                  "documentation": "An Auto Scaling group for which some Auto Scaling lifecycle event hooks could not be removed."
+                },
+                "documentation": "A list of Auto Scaling groups for which some Auto Scaling lifecycle event hooks could not be removed."
+              },
+              "serviceRoleArn": {
+                "shape_name": "Role",
+                "type": "string",
+                "documentation": "The service role Amazon Resource Name (ARN)."
+              },
+              "targetRevision": {
+                "shape_name": "S3Location",
+                "type": "structure",
+                "members": {
+                  "bucket": {
+                    "shape_name": "S3Bucket",
+                    "type": "string",
+                    "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+                  },
+                  "key": {
+                    "shape_name": "S3Key",
+                    "type": "string",
+                    "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+                  },
+                  "bundleType": {
+                    "shape_name": "BundleType",
+                    "type": "string",
+                    "enum": [
+                      "tar",
+                      "tgz",
+                      "zip"
+                    ],
+                    "documentation": "The file type of the application's bundled artifacts."
+                  },
+                  "version": {
+                    "shape_name": "VersionId",
+                    "type": "string",
+                    "documentation": "A specific version of the Amazon S3 object that represents the application's bundled artifacts."
+                  },
+                  "eTag": {
+                    "shape_name": "ETag",
+                    "type": "string",
+                    "documentation": "The ETag of the Amazon S3 object that represents the application's bundled artifacts."
+                  }
+                },
+                "documentation": "Information about a revision that is associated with the specified deployment group."
+              }
+            },
+            "documentation": "Information about the deployment group."
+          }
+        },
+        "documentation": "Represents the output of a get deployment group operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "DeploymentGroupNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was not specified."
+        },
+        {
+          "shape_name": "InvalidDeploymentGroupNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentGroupDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named deployment group doesn't exist in the user's AWS account."
+        }
+      ],
+      "documentation": "Returns information about a deployment group that is associated with a user's Amazon Web Services (AWS) account."
+    },
+    "GetDeploymentInstance": {
+      "name": "GetDeploymentInstance",
+      "input": {
+        "shape_name": "GetDeploymentInstanceInput",
+        "type": "structure",
+        "members": {
+          "deploymentId": {
+            "shape_name": "DeploymentId",
+            "type": "string",
+            "documentation": "The ID of the deployment that is associated with the instance.",
+            "required": true
+          },
+          "instanceId": {
+            "shape_name": "InstanceId",
+            "type": "string",
+            "documentation": "The instance ID to get information about.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a get deployment instance operation."
+      },
+      "output": {
+        "shape_name": "GetDeploymentInstanceOutput",
+        "type": "structure",
+        "members": {
+          "instanceSummary": {
+            "shape_name": "InstanceSummary",
+            "type": "structure",
+            "members": {
+              "deploymentId": {
+                "shape_name": "DeploymentId",
+                "type": "string",
+                "documentation": "The deployment ID."
+              },
+              "instanceId": {
+                "shape_name": "InstanceId",
+                "type": "string",
+                "documentation": "The Amazon EC2 instance ID."
+              },
+              "status": {
+                "shape_name": "InstanceStatus",
+                "type": "string",
+                "enum": [
+                  "Pending",
+                  "InProgress",
+                  "Succeeded",
+                  "Failed",
+                  "Skipped",
+                  "Unknown"
+                ],
+                "documentation": "The status of the instance."
+              },
+              "lastUpdatedAt": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "When the instance was last updated."
+              },
+              "lifecycleEvents": {
+                "shape_name": "LifecycleEventList",
+                "type": "list",
+                "members": {
+                  "shape_name": "LifecycleEvent",
+                  "type": "structure",
+                  "members": {
+                    "lifecycleEventName": {
+                      "shape_name": "LifecycleEventName",
+                      "type": "string",
+                      "documentation": "The lifecycle event name."
+                    },
+                    "startTime": {
+                      "shape_name": "Timestamp",
+                      "type": "timestamp",
+                      "documentation": "The lifecycle event start time."
+                    },
+                    "endTime": {
+                      "shape_name": "Timestamp",
+                      "type": "timestamp",
+                      "documentation": "The lifecycle event end time."
+                    },
+                    "status": {
+                      "shape_name": "LifecycleEventStatus",
+                      "type": "string",
+                      "enum": [
+                        "Pending",
+                        "InProgress",
+                        "Succeeded",
+                        "Failed",
+                        "Skipped",
+                        "Unknown"
+                      ],
+                      "documentation": "The lifecycle event status."
+                    }
+                  },
+                  "documentation": "A lifecycle event for the instance."
+                },
+                "documentation": "Lifecycle events for the instance."
+              }
+            },
+            "documentation": "Information about a deployment instance."
+          }
+        },
+        "documentation": "Represents the output of a get deployment instance operation."
+      },
+      "errors": [
+        {
+          "shape_name": "DeploymentIdRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment ID was not specified."
+        },
+        {
+          "shape_name": "DeploymentDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment does not exist in an instance group for an application."
+        },
+        {
+          "shape_name": "InstanceIdRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The instance ID was not specified."
+        },
+        {
+          "shape_name": "InvalidDeploymentIdException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid deployment ID was specified."
+        },
+        {
+          "shape_name": "InstanceDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The instance does not exist in a deployment group for an application."
+        }
+      ],
+      "documentation": "Returns information about an Amazon Elastic Compute Cloud (Amazon EC2) instance that is associated with a deployment."
+    },
+    "ListApplicationRevisions": {
+      "name": "ListApplicationRevisions",
+      "input": {
+        "shape_name": "ListApplicationRevisionsInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application that is associated with the revisions.",
+            "required": true
+          },
+          "sortBy": {
+            "shape_name": "ApplicationRevisionSortBy",
+            "type": "string",
+            "enum": [
+              "registerTime",
+              "firstUsedTime",
+              "lastUsedTime"
+            ],
+            "documentation": "The column name to sort the list of results by."
+          },
+          "sortOrder": {
+            "shape_name": "SortOrder",
+            "type": "string",
+            "enum": [
+              "ascending",
+              "descending"
+            ],
+            "documentation": "The order to sort the list of results by."
+          },
+          "bucket": {
+            "shape_name": "S3Bucket",
+            "type": "string",
+            "documentation": "A specific Amazon Simple Storage Service (Amazon S3) bucket name to limit the search for revisions."
+          },
+          "keyPrefix": {
+            "shape_name": "S3Key",
+            "type": "string",
+            "documentation": "A specific key prefix for the set of Amazon S3 objects to limit the search for revisions."
+          },
+          "deployed": {
+            "shape_name": "ListStateFilterAction",
+            "type": "string",
+            "enum": [
+              "include",
+              "exclude",
+              "ignore"
+            ],
+            "documentation": "Whether to list revisions based on whether the revision is the target revision of an instance group."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the input of a list appliation revisions operation."
+      },
+      "output": {
+        "shape_name": "ListApplicationRevisionsOutput",
+        "type": "structure",
+        "members": {
+          "revisions": {
+            "shape_name": "S3LocationList",
+            "type": "list",
+            "members": {
+              "shape_name": "S3Location",
+              "type": "structure",
+              "members": {
+                "bucket": {
+                  "shape_name": "S3Bucket",
+                  "type": "string",
+                  "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+                },
+                "key": {
+                  "shape_name": "S3Key",
+                  "type": "string",
+                  "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+                },
+                "bundleType": {
+                  "shape_name": "BundleType",
+                  "type": "string",
+                  "enum": [
+                    "tar",
+                    "tgz",
+                    "zip"
+                  ],
+                  "documentation": "The file type of the application's bundled artifacts."
+                },
+                "version": {
+                  "shape_name": "VersionId",
+                  "type": "string",
+                  "documentation": "A specific version of the Amazon S3 object that represents the application's bundled artifacts."
+                },
+                "eTag": {
+                  "shape_name": "ETag",
+                  "type": "string",
+                  "documentation": "The ETag of the Amazon S3 object that represents the application's bundled artifacts."
+                }
+              },
+              "documentation": "Information about a revision that is associated with the specified application."
+            },
+            "documentation": "Information about revisions that are associated with the specified application."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the output of a list appliation revisions operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidSortByException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The column name to sort by is either not present or was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidSortOrderException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The sort order was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidBucketNameFilterException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The bucket name doesn't exist or was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidKeyPrefixFilterException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified key prefix filter was specified in an invalid format."
+        },
+        {
+          "shape_name": "BucketNameFilterRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "A bucket name is required but was not provided."
+        },
+        {
+          "shape_name": "InvalidDeployedStateFilterException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployed state filter was specified in an invalid format."
+        },
+        {
+          "shape_name": "InvalidNextTokenException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The next token was specified in an invalid format."
+        }
+      ],
+      "documentation": "Returns information about revisions for a specific Amazon Simple Deployment Service (Amazon SDS) application that is associated with a user's Amazon Web Services (AWS) account."
+    },
+    "ListApplications": {
+      "name": "ListApplications",
+      "input": {
+        "shape_name": "ListApplicationsInput",
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the input of a list applications operation."
+      },
+      "output": {
+        "shape_name": "ListApplicationsOutput",
+        "type": "structure",
+        "members": {
+          "applications": {
+            "shape_name": "ApplicationsList",
+            "type": "list",
+            "members": {
+              "shape_name": "ApplicationName",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 100,
+              "documentation": "An application name."
+            },
+            "documentation": "A list of application names."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "If applicable, an identifier that can be used in a subsequent list applications call to retrieve the next set of applications."
+          }
+        },
+        "documentation": "Represents the output of a list applications operation."
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidNextTokenException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid next token was specified as input."
+        }
+      ],
+      "documentation": "Returns information about applications that are registered with Amazon Simple Deployment Service (Amazon SDS) under the user's AWS account."
+    },
+    "ListDeploymentConfigs": {
+      "name": "ListDeploymentConfigs",
+      "input": {
+        "shape_name": "ListDeploymentConfigsInput",
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the input of a list deployment configurations operation."
+      },
+      "output": {
+        "shape_name": "ListDeploymentConfigsOutput",
+        "type": "structure",
+        "members": {
+          "deploymentConfigsList": {
+            "shape_name": "DeploymentConfigsList",
+            "type": "list",
+            "members": {
+              "shape_name": "DeploymentConfigName",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 100,
+              "documentation": "A deployment configuration."
+            },
+            "documentation": "A list of deployment configurations."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the input of a list deployment configurations operation."
+      },
+      "errors": [
+        {
+          "shape_name": "InvalidNextTokenException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid next token was specified as input."
+        }
+      ],
+      "documentation": "Returns information about deployment configurations that are associated with a user's AWS account."
+    },
+    "ListDeploymentGroups": {
+      "name": "ListDeploymentGroups",
+      "input": {
+        "shape_name": "ListDeploymentGroupsInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application that is associated with the deployment groups.",
+            "required": true
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the input of a list deployment groups operation."
+      },
+      "output": {
+        "shape_name": "ListDeploymentGroupsOutput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The application name."
+          },
+          "deploymentGroups": {
+            "shape_name": "DeploymentGroupsList",
+            "type": "list",
+            "members": {
+              "shape_name": "DeploymentGroupName",
+              "type": "string",
+              "min_length": 1,
+              "max_length": 100,
+              "documentation": "A corresponding deployment group name."
+            },
+            "documentation": "A list of corresponding deployment group names."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier that can be used in a subsequent call to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the output of a list deployment groups operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "InvalidNextTokenException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid next token was specified as input."
+        }
+      ],
+      "documentation": "Returns information about deployment groups that are associated with a user's Amazon Web Services (AWS) account."
+    },
+    "ListDeploymentInstances": {
+      "name": "ListDeploymentInstances",
+      "input": {
+        "shape_name": "ListDeploymentInstancesInput",
+        "type": "structure",
+        "members": {
+          "deploymentId": {
+            "shape_name": "DeploymentId",
+            "type": "string",
+            "documentation": "The ID of the deployment that is associated with the instances.",
+            "required": true
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          },
+          "instanceStatusFilter": {
+            "shape_name": "InstanceStatusList",
+            "type": "list",
+            "members": {
+              "shape_name": "InstanceStatus",
+              "type": "string",
+              "enum": [
+                "Pending",
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Skipped",
+                "Unknown"
+              ],
+              "documentation": "An instance status filter."
+            },
+            "documentation": "A list of instance status filters."
+          }
+        },
+        "documentation": "Represents the input of a list deployment instances operation."
+      },
+      "output": {
+        "shape_name": "ListDeploymentInstancesOutput",
+        "type": "structure",
+        "members": {
+          "instancesList": {
+            "shape_name": "InstancesList",
+            "type": "list",
+            "members": {
+              "shape_name": "InstanceId",
+              "type": "string",
+              "documentation": "An instance ID."
+            },
+            "documentation": "A list of instance IDs."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "If applicable, an identifier that can be used in a subsequent list deployment instances call to retrieve the next set of deployment instances."
+          }
+        },
+        "documentation": "Represents the input of a list deployment instances operation.</p>"
+      },
+      "errors": [
+        {
+          "shape_name": "DeploymentIdRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment ID was not specified."
+        },
+        {
+          "shape_name": "DeploymentDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment does not exist in an instance group for an application."
+        },
+        {
+          "shape_name": "DeploymentNotStartedException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment identified by the deploymentId has not been started."
+        },
+        {
+          "shape_name": "InvalidNextTokenException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid next token was specified as input."
+        },
+        {
+          "shape_name": "InvalidDeploymentIdException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid deployment ID was specified."
+        },
+        {
+          "shape_name": "InvalidInstanceStatusException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified instance is invalid."
+        }
+      ],
+      "documentation": "Returns information about Amazon Elastic Compute Cloud (Amazon EC2) instances that are involved in a deployment."
+    },
+    "ListDeployments": {
+      "name": "ListDeployments",
+      "input": {
+        "shape_name": "ListDeploymentsInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the application that is associated with the deployments."
+          },
+          "deploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The name of the deployment group that is associated with the deployments."
+          },
+          "includeOnlyStatuses": {
+            "shape_name": "DeploymentStatusList",
+            "type": "list",
+            "members": {
+              "shape_name": "DeploymentStatus",
+              "type": "string",
+              "enum": [
+                "Created",
+                "Queued",
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Aborted"
+              ],
+              "documentation": "A deployment status."
+            },
+            "documentation": "A subset of deployments to list, by status."
+          },
+          "createTimeRange": {
+            "shape_name": "TimeRange",
+            "type": "structure",
+            "members": {
+              "start": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "The range's start time."
+              },
+              "end": {
+                "shape_name": "Timestamp",
+                "type": "timestamp",
+                "documentation": "The range's end time."
+              }
+            },
+            "documentation": "Information about a time range."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "An identifier retrieved from a previous call that can be used to retrieve the next set of items in the list."
+          }
+        },
+        "documentation": "Represents the input of a list deployments operation."
+      },
+      "output": {
+        "shape_name": "ListDeploymentsOutput",
+        "type": "structure",
+        "members": {
+          "deployments": {
+            "shape_name": "DeploymentsList",
+            "type": "list",
+            "members": {
+              "shape_name": "DeploymentId",
+              "type": "string",
+              "documentation": "A deployment ID."
+            },
+            "documentation": "A list of deployments."
+          },
+          "nextToken": {
+            "shape_name": "NextToken",
+            "type": "string",
+            "documentation": "If applicable, an identifier that can be used in a subsequent list deployments call to retrieve the next set of deployments."
+          }
+        },
+        "documentation": "Represents the output of a list deployments operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "InvalidDeploymentGroupNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DeploymentGroupDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named deployment group doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "DeploymentGroupNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The deployment group name was not specified."
+        },
+        {
+          "shape_name": "InvalidTimeRangeException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified time range was provided in an invalid format."
+        },
+        {
+          "shape_name": "InvalidDeploymentStatusException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified deployment status doesn't exist or cannot be determined."
+        },
+        {
+          "shape_name": "InvalidNextTokenException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An invalid next token was specified as input."
+        }
+      ],
+      "documentation": "Returns information about deployments that are associated with a user's Amazon Web Services (AWS) account."
+    },
+    "RegisterApplicationRevision": {
+      "name": "RegisterApplicationRevision",
+      "input": {
+        "shape_name": "RegisterApplicationRevisionInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "type": "string",
+            "min_length": 1,
+            "max_length": 100,
+            "documentation": "The application name that is associated with the revision.",
+            "required": true
+          },
+          "description": {
+            "shape_name": "Description",
+            "type": "string",
+            "documentation": "A comment about the revision."
+          },
+          "revision": {
+            "shape_name": "S3Location",
+            "type": "structure",
+            "members": {
+              "bucket": {
+                "shape_name": "S3Bucket",
+                "type": "string",
+                "documentation": "The name of the Amazon S3 bucket where the application's bundled artifacts are stored."
+              },
+              "key": {
+                "shape_name": "S3Key",
+                "type": "string",
+                "documentation": "The name of the Amazon S3 object that represents the application's bundled artifacts."
+              },
+              "bundleType": {
+                "shape_name": "BundleType",
+                "type": "string",
+                "enum": [
+                  "tar",
+                  "tgz",
+                  "zip"
+                ],
+                "documentation": "The file type of the application's bundled artifacts."
+              },
+              "version": {
+                "shape_name": "VersionId",
+                "type": "string",
+                "documentation": "A specific version of the Amazon S3 object that represents the application's bundled artifacts."
+              },
+              "eTag": {
+                "shape_name": "ETag",
+                "type": "string",
+                "documentation": "The ETag of the Amazon S3 object that represents the application's bundled artifacts."
+              }
+            },
+            "documentation": "Information about the revision in Amazon S3.",
+            "required": true
+          }
+        },
+        "documentation": "Represents the input of a register application revision operation."
+      },
+      "output": "Represents the output of a register application revision operation.",
+      "errors": [
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The named application doesn't exist in the user's AWS account."
+        },
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was not specified."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The application name was specified in an invalid format."
+        },
+        {
+          "shape_name": "DescriptionTooLongException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The description that was provided is too long."
+        },
+        {
+          "shape_name": "RevisionRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "Revision information is required but was not provided."
+        },
+        {
+          "shape_name": "InvalidRevisionException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The revision is invalid."
+        }
+      ],
+      "documentation": "Registers with Amazon Simple Deployment Service (Amazon SDS) a revision that has already been uploaded to Amazon Simple Storage Service (Amazon S3). Call this command if you want to deploy a revision with Amazon SDS after you have already uploaded it to Amazon S3."
+    },
+    "UpdateApplication": {
+      "name": "UpdateApplication",
+      "input": {
+        "shape_name": "UpdateApplicationInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The existing application name."
+          },
+          "newApplicationName": {
+            "shape_name": "ApplicationName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The new application name."
+          }
+        },
+        "documentation": "Represents the input of an update application operation."
+      },
+      "output": "Represents the output of an update application operation.",
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An application name is required."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified application name is invalid."
+        },
+        {
+          "shape_name": "ApplicationAlreadyExistsException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified application already exists."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified application does not exist."
+        }
+      ],
+      "documentation": "Changes an existing application's name."
+    },
+    "UpdateDeploymentGroup": {
+      "name": "UpdateDeploymentGroup",
+      "input": {
+        "shape_name": "UpdateDeploymentGroupInput",
+        "type": "structure",
+        "members": {
+          "applicationName": {
+            "shape_name": "ApplicationName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The name of the associated application.",
+            "required": true
+          },
+          "currentDeploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "The current deployment group's name.",
+            "required": true
+          },
+          "newDeploymentGroupName": {
+            "shape_name": "DeploymentGroupName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "If you want to change the deployment group's name, specify the new deployment group name."
+          },
+          "deploymentConfigName": {
+            "shape_name": "DeploymentConfigName",
+            "min_length": 1,
+            "max_length": 100,
+            "type": "string",
+            "documentation": "If you want to change the current deployment configuration, specify the new deployment configuration name."
+          },
+          "ec2TagFilters": {
+            "shape_name": "EC2TagFilterList",
+            "type": "list",
+            "members": {
+              "shape_name": "EC2TagFilter",
+              "type": "structure",
+              "members": {
+                "Key": {
+                  "shape_name": "Key",
+                  "type": "string",
+                  "documentation": "The Amazon EC2 tag filter key."
+                },
+                "Value": {
+                  "shape_name": "Value",
+                  "type": "string",
+                  "documentation": "The Amazon EC2 tag filter value."
+                },
+                "Type": {
+                  "shape_name": "EC2TagFilterType",
+                  "type": "string",
+                  "enum": [
+                    "KEY_ONLY",
+                    "VALUE_ONLY",
+                    "KEY_AND_VALUE"
+                  ],
+                  "documentation": "Whether to specify a key only, a value only, or both a key and value."
+                }
+              },
+              "documentation": "An Amazon EC2 tag to filter on."
+            },
+            "documentation": "The Amazon EC2 tags to filter on."
+          },
+          "autoScalingGroups": {
+            "shape_name": "AutoScalingGroupNameList",
+            "type": "list",
+            "members": {
+              "shape_name": "AutoScalingGroupName",
+              "type": "string",
+              "documentation": "An Auto Scaling group name."
+            },
+            "documentation": "A list of Auto Scaling groups."
+          },
+          "serviceRoleArn": {
+            "shape_name": "Role",
+            "type": "string",
+            "documentation": "The user-supplied AWS Identity & Access Management (IAM) role Amazon Resource Name (ARN) that allows Amazon SDS to act on their behalf when interacting with AWS services."
+          }
+        },
+        "documentation": "Represents the input of an update deployment group operation."
+      },
+      "output": {
+        "shape_name": "UpdateDeploymentGroupOutput",
+        "type": "structure",
+        "members": {
+          "hooksNotCleanedUp": {
+            "shape_name": "AutoScalingGroupList",
+            "type": "list",
+            "members": {
+              "shape_name": "AutoScalingGroup",
+              "type": "structure",
+              "members": {
+                "name": {
+                  "shape_name": "AutoScalingGroupName",
+                  "type": "string",
+                  "documentation": "The name of the Auto Scaling group for which the lifecycle event hook could not be removed."
+                },
+                "hook": {
+                  "shape_name": "AutoScalingGroupHook",
+                  "type": "string",
+                  "documentation": "The name of the Auto Scaling lifecycle event hook that could not be removed."
+                }
+              },
+              "documentation": "An Auto Scaling group for which some Auto Scaling lifecycle event hooks could not be removed."
+            },
+            "documentation": "A list of Auto Scaling groups for which some Auto Scaling lifecycle event hooks could not be removed."
+          }
+        },
+        "documentation": "Represents the output of an update deployment group operation."
+      },
+      "errors": [
+        {
+          "shape_name": "ApplicationNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "An application name is required but was not provided."
+        },
+        {
+          "shape_name": "InvalidApplicationNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified application name is invalid."
+        },
+        {
+          "shape_name": "ApplicationDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified application does not exist."
+        },
+        {
+          "shape_name": "InvalidDeploymentGroupNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified deployment group name is invalid."
+        },
+        {
+          "shape_name": "DeploymentGroupAlreadyExistsException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified deployment group already exists."
+        },
+        {
+          "shape_name": "DeploymentGroupNameRequiredException",
+          "type": "structure",
+          "members": {},
+          "documentation": "A deployment group name is required but was not provided."
+        },
+        {
+          "shape_name": "InvalidEC2TagException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified Amazon EC2 tag is invalid."
+        },
+        {
+          "shape_name": "InvalidAutoScalingGroupException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified Auto Scaling group is invalid."
+        },
+        {
+          "shape_name": "InvalidDeploymentConfigNameException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified deployment configuration name is invalid."
+        },
+        {
+          "shape_name": "DeploymentConfigDoesNotExistException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified deployment configuration does not exist."
+        },
+        {
+          "shape_name": "InvalidRoleException",
+          "type": "structure",
+          "members": {},
+          "documentation": "The specified service role ARN is invalid."
+        }
+      ],
+      "documentation": "Changes information about an existing deployment group."
+    }
+  },
+  "metadata": {
+    "regions": {
+      "us-east-1": "https://razorbill-preview.us-east-1.amazonaws.com"
+    }
+  },
+  "retry": {
+    "__default__": {
+      "max_attempts": 5,
+      "delay": {
+        "type": "exponential",
+        "base": "rand",
+        "growth_factor": 2
+      },
+      "policies": {
+        "general_socket_errors": {
+          "applies_when": {
+            "socket_errors": [
+              "GENERAL_CONNECTION_ERROR"
+            ]
+          }
+        },
+        "general_server_error": {
+          "applies_when": {
+            "response": {
+              "http_status_code": 500
+            }
+          }
+        },
+        "service_unavailable": {
+          "applies_when": {
+            "response": {
+              "http_status_code": 503
+            }
+          }
+        },
+        "limit_exceeded": {
+          "applies_when": {
+            "response": {
+              "http_status_code": 509
+            }
+          }
+        }
+      }
+    }
+  }
+}
