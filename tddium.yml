@@ -2,7 +2,7 @@ python:
     python_version: 2.7
     pip_requirements_file: requirements.txt
 user_environment:
-    AWS_DATA_PATH: ${TDDIUM_REPO_ROOT}/aws/sds
+    AWS_DATA_PATH: ~/u1/src/repo/sds-test/aws/sds
 tests:
   - echo hello
   - env
