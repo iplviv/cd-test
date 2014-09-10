@@ -8,7 +8,11 @@ SCRIPTPATH=`dirname $SCRIPT`
 
 TEMPLATE_DIR=${SCRIPTPATH}/Template
 
+echo 'Copy template into app directory'
 cp -r ${TEMPLATE_DIR}/* $DEST_APP_FOLDER
 
+echo 'Copy generated AppSpecs files'
 mkdir -p ${DEST_APP_FOLDER}/SimpleDeployService/AppSpecs
 cp -r ${APP_SPECS_FOLDER}/* ${DEST_APP_FOLDER}/SimpleDeployService/AppSpecs
+
+echo 'Done'
