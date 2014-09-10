@@ -7,7 +7,7 @@ user_environment:
 tests:
   - echo hello
   - ls aws/sds
-
+  - exit 1
 deploy:
     sds:
         app_spec_generator: sds/app_spec_generator
