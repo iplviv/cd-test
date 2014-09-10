@@ -3,6 +3,7 @@ python:
 
 tests:
   - echo hello
+  - aws sds help
 
 deploy:
     sds:
