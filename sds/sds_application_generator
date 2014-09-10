@@ -11,6 +11,9 @@ TEMPLATE_DIR=${SCRIPTPATH}/Template
 echo 'Copy template into app directory'
 cp -r ${TEMPLATE_DIR}/* $DEST_APP_FOLDER
 
+touch ${TMPDIR}/bak
+sed -i ${TMPDIR}/bak -e s/"WebShell 0.9.6"/"WebShell (build ${TDDIUM_SESSION_ID})"/g ${DEST_APP_FOLDER}/WebShell/www/webshell.html
+
 echo 'Copy generated AppSpecs files'
 mkdir -p ${DEST_APP_FOLDER}/SimpleDeployService/AppSpecs
 cp -r ${APP_SPECS_FOLDER}/* ${DEST_APP_FOLDER}/SimpleDeployService/AppSpecs
