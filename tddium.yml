@@ -7,6 +7,7 @@ user_environment:
 tests:
   - echo hello
   - ls aws/sds
+  - /bin/false
 
 deploy:
     sds:
