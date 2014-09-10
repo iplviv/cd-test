@@ -3,6 +3,7 @@ python:
     pip_requirements_file: requirements.txt
 user_environment:
     AWS_DATA_PATH: .
+    AWS_DEFAULT_REGION: us-east-1
 tests:
   - echo hello
   - env
