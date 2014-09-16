@@ -19,5 +19,5 @@
               :sds_deployment_group: SimpleDG
               :s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
             - :branch: deploy_mapping
-              :action: publish
+              :action: publish1
               :s3_path: bucket=solano-sds,bundleType=zip,key=DeployMapping.zip
