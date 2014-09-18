@@ -20,4 +20,4 @@
               :s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
             - :branch: deploy_mapping
               :action: publish
-              :s3_path: bucket=solano-sds,bundleType=zip,key=DeployMapping-:revision-:branch.zip
+              :s3_path: bucket=solano-sds,bundleType=zip,key=Test-:branch-:session_id.zip
