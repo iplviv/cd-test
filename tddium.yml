@@ -9,14 +9,14 @@
   - ls aws/sds
 
 :deploy:
-    :sds:
+    :amazon:
         :app_spec_generator: sds/app_spec_generator
-        :sds_application_name: SimpleApp
-        :sds_application_generator: sds/sds_application_generator
+        :application_name: SimpleApp
+        :application_generator: sds/sds_application_generator
         :deploy_mapping:
             - :branch: master
               :action: deploy
-              :sds_deployment_group: SimpleD
+              :deployment_group: SimpleD
               :s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
             - :branch: deploy_mapping
               :action: publish
