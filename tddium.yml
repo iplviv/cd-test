@@ -17,7 +17,10 @@
             - :branch: master
               :action: deploy
               :deployment_group: SimpleDG
-              :s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
+              :s3_path: bucket=solano-sds,bundleType=tgz,key=TestApp.tgz
             - :branch: test*
               :action: publish
-              :s3_path: bucket=solano-sds,bundleType=zip,key=Test-:branch-:session_id.zip
+              :s3_path: bucket=solano-sds,bundleType=tar,key=Test-:branch-:session_id.tar
+            - :branch: default_actions
+              :action: publish
+              :s3_path: bucket=solano-sds,bundleType=zip,key=DefaultActions.zip
