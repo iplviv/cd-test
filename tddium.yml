@@ -6,18 +6,18 @@
     AWS_DEFAULT_REGION: us-east-1
 :tests:
   - echo hello
-  - ls aws/sds
+  - ls aws/deploy
 
 :deploy:
     :amazon:
-        :app_spec_generator: sds/app_spec_generator
+        :app_spec_generator: deploy/app_spec_generator
         :application_name: SimpleApp
-        :application_generator: sds/sds_application_generator
+        :application_generator: deploy/application_generator
         :deploy_mapping:
             - :branch: master
               :action: deploy
               :deployment_group: SimpleDG
               :s3_path: bucket=solano-sds,bundleType=zip,key=TestApp.zip
-            - :branch: deploy_mapping
+            - :branch: test*
               :action: publish
               :s3_path: bucket=solano-sds,bundleType=zip,key=Test-:branch-:session_id.zip
