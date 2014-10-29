@@ -10,7 +10,7 @@
 
 :deploy:
     :amazon:
-        :app_spec_template: deploy/appspec.yml
+        :app_spec_template: appspec.yml
         :application_name: SimpleApp
         :deploy_mapping:
             - :branch: master
