@@ -16,7 +16,7 @@
         :deploy_mapping:
             - :branch: master
               :action: deploy
-              :deployment_group: SimpleDG
+              :deployment_group: DemoGroup
               :s3_path: bucket=solano-sds,bundleType=tgz,key=TestApp.tgz
             - :branch: test*
               :action: publish
