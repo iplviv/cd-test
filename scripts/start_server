@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /home/ec2-user/deploy/WebShell/
+cd /home/ec2-user/
 ./make_certificate.sh
 ./webshell.py  --ssl-disable -i 0.0.0.0 -c bash -d
