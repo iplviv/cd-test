@@ -5,8 +5,7 @@
     AWS_DATA_PATH: .
     AWS_DEFAULT_REGION: us-east-1
 :tests:
-  - echo hello
-  - ls aws/deploy
+  - ./run-tests.sh
 
 :deploy:
     :amazon:
