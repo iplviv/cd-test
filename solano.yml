@@ -20,6 +20,3 @@
             - :branch: test*
               :action: publish
               :s3_path: bucket=solano-sds,bundleType=tar,key=Test-:branch-:session_id.tar
-            - :branch: default_actions
-              :action: publish
-              :s3_path: bucket=solano-sds,bundleType=zip,key=DefaultActions.zip
