@@ -14,7 +14,7 @@
         :deploy_mapping:
             - :branch: master
               :action: deploy
-              :deployment_group: DemoGroup
+              :deployment_group: SimpleDG
               :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sds","bundleType":"tgz","key":"TestApp.tgz"}}'
             - :branch: nov_4_changes
               :action: deploy
