@@ -15,7 +15,11 @@
             - :branch: master
               :action: deploy
               :deployment_group: DemoGroup
-              :s3_path: bucket=solano-sds,bundleType=tgz,key=TestApp.tgz
+              :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sds","bundleType":"tgz","key":"TestApp.tgz"}}'
+            - :branch: nov_4_changes
+              :action: deploy
+              :deployment_group: SimpleDG
+              :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sds","bundleType":"tgz","key":"Nov4Changes.tgz"}}'
             - :branch: test*
               :action: publish
-              :s3_path: bucket=solano-sds,bundleType=tar,key=Test-:branch-:session_id.tar
+              :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sds","bundleType":"tar","key":"Test-:branch-:session_id.tar"}}'
