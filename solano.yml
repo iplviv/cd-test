@@ -5,7 +5,7 @@
     :version: 'ruby-2.1.2'
 :user_environment:
     AWS_DATA_PATH: .
-    AWS_DEFAULT_REGION: eu-central-1
+    AWS_DEFAULT_REGION: us-east-1
 :tests:
   - ./run-tests.sh
 
