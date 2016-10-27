@@ -12,7 +12,7 @@
 :deploy:
     :amazon:
         :app_spec_template: appspec.yml
-        :application_name: SimpleApp
+        :application_name: DemoApplication
         :deploy_mapping:
             - :branch: master
               :action: deploy
