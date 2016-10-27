@@ -12,7 +12,7 @@
 :deploy:
     :amazon:
         :app_spec_template: appspec.yml
-        :application_name: DemoApplication
+        :application_name: SimpleApp
         :deploy_mapping:
             - :branch: master
               :action: deploy
@@ -24,4 +24,4 @@
               :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sts-test2","bundleType":"tgz","key":"Nov4Changes.tgz"}}'
             - :branch: test*
               :action: publish
-              :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sts-test2","bundleType":"tar","key":"Test-:branch-:session_id.tar"}}'
+              :revision: '{"revisionType":"S3","s3Location":{"bucket":"solano-sds","bundleType":"tar","key":"Test-:branch-:session_id.tar"}}'
